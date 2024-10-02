@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  api:
+    build: api
+    container_name: go_url_shortener_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - mongodb
+    networks:
+      - my-network
+  db:
+    build: db
+    container_name: go_url_shortener_database
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+    networks:
+      - my-network
+  frontend:
+    build: frontend
+    container_name: go_url_shortener_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+    - api
+    stdin_open: true
+    tty: true
+    networks:
+      - my-network
+  mongodb:
+    build: mongodb
+    container_name: go_url_shortener_mongodb
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

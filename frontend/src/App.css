@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure the body can scroll vertically */
+body {
+  margin: 0;
+  overflow: hidden; /* Hide the default scrollbar */
+}
+
+/* Create a container to allow scrolling */
+.scroll-container {
+  height: 100vh; /* Full viewport height */
+  overflow: auto; /* Enable scrolling */
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari) */
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+/* Hide scrollbar in Firefox */
+.scroll-container {
+  scrollbar-width: none; /* Hides the scrollbar */
+}
+
+/* Hide scrollbar in Edge */
+@supports (-ms-overflow-style: none) {
+  .scroll-container {
+    -ms-overflow-style: none; /* Hides the scrollbar */
+  }
+}
